@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import moviesData from "../../Mock/moviesData.json";
 import "./MoviesComponent.css";
-import _ from 'lodash';
+import _ from "lodash";
 import SearchBar from "../SearchBar/SearchBar";
 import Filter from "../Filter/Filter";
 import Movie from "../Movie/Movie";
@@ -12,13 +11,13 @@ const MoviesComponent = () => {
     { title: "Focus", rating: 6.9, category: "Comedy" },
     { title: "The Lazarus Effect", rating: 6.4, category: "Thriller" },
     { title: "Everly", rating: 5.0, category: "Action" },
-    { title: "Maps to the Stars", rating: 7.5, category: "Drama" }
+    { title: "Maps to the Stars", rating: 7.5, category: "Drama" },
   ]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedRatings, setSelectedRatings] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState(movies);
-  const [focused,setFocused]=useState(false)
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
     setFilteredMovies(movies);
@@ -28,21 +27,60 @@ const MoviesComponent = () => {
     setFilteredMovies(filterMovies());
   }, [searchTerm, selectedRatings, selectedGenres]);
 
+  useEffect(() => {
+    console.log(filteredMovies);
+    // console.log(filterMovies)
+  }, [filteredMovies]);
+
   const filterMovies = () => {
-    let filtered = _.filter(movies, movie =>
+    let rFlag = false;
+    let filtered = _.filter(movies, (movie) =>
       _.includes(_.lowerCase(movie.title), _.lowerCase(searchTerm))
     );
 
     if (selectedRatings.length > 0) {
-      filtered = _.filter(filtered, movie =>
-        _.includes(selectedRatings, movie.rating)
-      );
+      let fmovies = [];
+      selectedRatings.map((r) => {
+        if (r === "0") {
+          fmovies = movies;
+          return;
+        } else {
+          movies.map((movie) => {
+            if (movie.rating === parseInt(r)) {
+              rFlag = true;
+              fmovies.push(movie);
+            }
+          });
+        }
+      });
+      filtered = fmovies ? fmovies : null;
     }
 
     if (selectedGenres.length > 0) {
-      filtered = _.filter(filtered, movie =>
-        _.includes(selectedGenres, movie.category)
-      );
+      let fmovies = [];
+      selectedGenres.map((r) => {
+        if (r === "any") {
+          if (rFlag === false) {
+            fmovies = movies;
+            return;
+          }
+        } else {
+          if (rFlag) {
+            filteredMovies.map((movie) => {
+              if (movie.category === r) {
+                fmovies.push(movie);
+              }
+            });
+          } else {
+            movies.map((movie) => {
+              if (movie.category === r) {
+                fmovies.push(movie);
+              }
+            });
+          }
+        }
+      });
+      filtered = fmovies?.length > 0 ? fmovies : filtered;
     }
 
     return filtered;
@@ -66,14 +104,16 @@ const MoviesComponent = () => {
       </div>
       {focused ? (
         <div className="moviesData">
-          {filteredMovies.map((movie, index) => (
-            <Movie
-              key={index}
-              title={movie.title}
-              rating={movie.rating}
-              category={movie.category}
-            />
-          ))}
+          {filteredMovies?.length > 0
+            ? filteredMovies.map((movie, index) => (
+                <Movie
+                  key={index}
+                  title={movie.title}
+                  rating={movie.rating}
+                  category={movie.category}
+                />
+              ))
+            : null}
         </div>
       ) : null}
     </div>

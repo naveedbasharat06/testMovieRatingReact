@@ -8,19 +8,6 @@ const Movie = ({ title, rating, category }) => (
     </div>
     <div className="Stars" style={{ "--rating": rating }} />
     </>
-  // <div className="moviesData">
-  //   {moviesData.map((movie) => {
-  //     return (
-  // <div>
-  //   <div className="movie">
-  //     <div>{movie.title}</div>
-  //     <div>{movie.category}</div>
-  //   </div>
-  //   <div className="Stars" style={{ "--rating": movie.rating }} />
-  // </div>
-  //     );
-  //   })}
-  // </div>
 );
 
 export default Movie;

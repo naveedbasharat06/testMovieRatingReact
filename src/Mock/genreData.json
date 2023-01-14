@@ -1,7 +1,7 @@
 [
-    { "value": "any", "label": "Any genre" },
-    { "value": "action", "label": "Action" },
-    { "value": "comedy", "label": "Comedy" },
-    { "value": "drama", "label": "Drama" },
-    { "value": "thriller", "label": "Thriller" }
+  { "value": "any", "label": "Any genre","isSelected" : false},
+  { "value": "Action", "label": "Action","isSelected" : false },
+  { "value": "Comedy", "label": "Comedy" ,"isSelected" : false},
+  { "value": "Drama", "label": "Drama","isSelected" : false },
+  { "value": "Thriller", "label": "Thriller","isSelected" : false }
 ]
