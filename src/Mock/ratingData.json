@@ -1,0 +1,57 @@
+[
+  { 
+    "value": "0",
+    "label": "Any rating",
+    "isSelected" : false
+   },
+  {
+    "value": "1",
+    "label": "\u2605 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "2",
+    "label": "\u2605 \u2605 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "3",
+    "label": "\u2605 \u2605 \u2605 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "4",
+    "label": "\u2605 \u2605 \u2605 \u2605 \u2606 \u2606 \u2606 \u2606 \u2606 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "5",
+    "label": "\u2605 \u2605 \u2605 \u2605 \u2605 \u2606 \u2606 \u2606 \u2606 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "6",
+    "label": "\u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2606 \u2606 \u2606 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "7",
+    "label": "\u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2606 \u2606 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "8",
+    "label": "\u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2606 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "9",
+    "label": "\u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2606",
+    "isSelected" : false
+  },
+  {
+    "value": "10",
+    "label": "\u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605 \u2605",
+    "isSelected" : false
+  }
+]

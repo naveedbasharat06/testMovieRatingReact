@@ -1,0 +1,7 @@
+[
+    { "value": "any", "label": "Any genre" },
+    { "value": "action", "label": "Action" },
+    { "value": "comedy", "label": "Comedy" },
+    { "value": "drama", "label": "Drama" },
+    { "value": "thriller", "label": "Thriller" }
+]
