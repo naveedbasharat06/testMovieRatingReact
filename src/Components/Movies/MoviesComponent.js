@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./MoviesComponent.css";
-import _ from "lodash";
 import SearchBar from "../SearchBar/SearchBar";
 import Filter from "../Filter/Filter";
 import Movie from "../Movie/Movie";
@@ -27,60 +25,104 @@ const MoviesComponent = () => {
     setFilteredMovies(filterMovies());
   }, [searchTerm, selectedRatings, selectedGenres]);
 
-  useEffect(() => {
-    console.log(filteredMovies);
-    // console.log(filterMovies)
-  }, [filteredMovies]);
-
   const filterMovies = () => {
     let rFlag = false;
-    let filtered = _.filter(movies, (movie) =>
-      _.includes(_.lowerCase(movie.title), _.lowerCase(searchTerm))
-    );
+    let sFlag = false;
+    let filtered = [];
+
+    if (searchTerm.length > 0) {
+      filtered = [];
+      movies.forEach((movie) => {
+        if (
+          movie.title
+            .toLocaleLowerCase()
+            .search(searchTerm.toLocaleLowerCase()) > -1
+        ) {
+          sFlag = true;
+          filtered.push(movie);
+        }
+      });
+    }
 
     if (selectedRatings.length > 0) {
       let fmovies = [];
-      selectedRatings.map((r) => {
-        if (r === "0") {
+      let tFlag = false;
+      for (let k = 0; k < selectedRatings.length; k++) {
+        let r = selectedRatings[k];
+
+        if (r === "0" && !sFlag) {
           fmovies = movies;
-          return;
-        } else {
+          rFlag = true;
+          tFlag = true;
+          break;
+        } else if (r !== "0" && sFlag) {
+          filtered.map((movie) => {
+            if (movie.rating === parseInt(r)) {
+              rFlag = true;
+              tFlag = true;
+              fmovies.push(movie);
+            }
+          });
+        } else if (r !== "0" && !sFlag) {
           movies.map((movie) => {
             if (movie.rating === parseInt(r)) {
               rFlag = true;
+              tFlag = true;
               fmovies.push(movie);
             }
           });
         }
-      });
-      filtered = fmovies ? fmovies : null;
+      }
+      if (tFlag) {
+        filtered = fmovies?.length > 0 ? fmovies : [...filtered];
+      } else {
+        filtered = selectedRatings.find((sr) => sr === "0") ? filtered : null;
+      }
     }
 
     if (selectedGenres.length > 0) {
       let fmovies = [];
-      selectedGenres.map((r) => {
-        if (r === "any") {
-          if (rFlag === false) {
-            fmovies = movies;
-            return;
-          }
+      let tFlag = false;
+      for (let k = 0; k < selectedGenres.length; k++) {
+        let r = selectedGenres[k];
+        // selectedGenres.forEach((r) => {
+        if (r === "any" && !sFlag && !rFlag) {
+          fmovies = movies;
+          tFlag = true;
+          break;
         } else {
-          if (rFlag) {
-            filteredMovies.map((movie) => {
-              if (movie.category === r) {
-                fmovies.push(movie);
-              }
-            });
-          } else {
-            movies.map((movie) => {
-              if (movie.category === r) {
-                fmovies.push(movie);
-              }
-            });
+          if (r !== "any") {
+            if (rFlag || sFlag) {
+              filtered.map((movie) => {
+                if (movie.category === r) {
+                  fmovies.push(movie);
+                  tFlag = true;
+                }
+              });
+            } else {
+              movies.map((movie) => {
+                if (movie.category === r) {
+                  tFlag = true;
+                  fmovies.push(movie);
+                }
+              });
+            }
           }
         }
-      });
-      filtered = fmovies?.length > 0 ? fmovies : filtered;
+      }
+      if (tFlag) {
+        filtered = fmovies?.length > 0 ? fmovies : filtered;
+      } else {
+        filtered = selectedGenres.find((g) => g === "any") ? filtered : null;
+      }
+    }
+
+    if (
+      searchTerm.length === 0 &&
+      selectedRatings.length === 0 &&
+      selectedGenres.length === 0
+    ) {
+      filtered = movies;
     }
 
     return filtered;

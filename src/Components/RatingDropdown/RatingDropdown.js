@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import ratings from "../../Mock/ratingData.json";
 import "./RatingDropdown.css";
 import { default as ReactSelect } from "react-select";

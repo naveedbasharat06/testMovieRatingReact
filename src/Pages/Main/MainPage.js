@@ -1,12 +1,12 @@
-import React from 'react'
-import MoviesComponent from '../../Components/Movies/MoviesComponent'
-import './MainPage.css'
+import React from "react";
+import MoviesComponent from "../../Components/Movies/MoviesComponent";
+import "./MainPage.css";
 const MainPage = () => {
   return (
     <div className="Main">
-      <MoviesComponent/>
+      <MoviesComponent />
     </div>
-  )
-}
+  );
+};
 
-export default MainPage
+export default MainPage;

@@ -1,6 +1,6 @@
 import React from "react";
 import GenreDropdown from "../GenreDropdown/GenreDropdown";
-import RatingDropdown from "../Rating/RatingDropdown";
+import RatingDropdown from "../RatingDropdown/RatingDropdown";
 const Filter = ({
   selectedRatings,
   setSelectedRatings,
