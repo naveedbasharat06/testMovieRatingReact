@@ -1,3 +1,5 @@
+import React from "react";
+import "./style.css";
 import MainPage from './Pages/Main/MainPage';
 
 function App() {
